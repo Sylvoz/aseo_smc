@@ -25,7 +25,7 @@ try{
   const page = await browser.newPage()
 
   
-  await page.goto(`https://pago.smc.cl/pagoAseov2/muni/${municipality}.aspx`,{timeout:50000});
+  await page.goto(`https://pago.smc.cl/pagoAseov2/muni/${municipality}.aspx`,{timeout:20000});
   await page.waitForSelector('#ctl00_ContentPlaceHolder1_txtRol',{timeout:5000})
   await page.type('#ctl00_ContentPlaceHolder1_txtRol',rol)
   await page.type('#ctl00_ContentPlaceHolder1_txtRol2',dv)
