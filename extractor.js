@@ -35,6 +35,8 @@ try{
   try{
     await page.waitForSelector('#ctl00_ContentPlaceHolder1_lblTextHelp',{timeout:5000})
     return {data:[{
+      id:rol+'-'+dv,
+      measurement_date:fechaFormateada,
       invoice_amount: "Predio no existe",
     }]}
   } catch{
