@@ -15,7 +15,7 @@ app.get("/extractor",query("id").notEmpty(),query("municipality").notEmpty(),
       const data = req.query.id;
       const rol = data.substring(0,data.indexOf('-'))
       const dv= data.substring(data.indexOf('-')+1,data.length)
-      const municipality= req.query.municipality.toLowerCase().replace('í','i')
+      const municipality= req.query.municipality.toLowerCase().replace('í','i').replace(' ','_')
       if (rol == "" || dv ==""){
         return res.status(400).send({ id: "Error en rol" })
       }

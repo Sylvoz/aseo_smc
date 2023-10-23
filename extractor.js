@@ -30,6 +30,7 @@ try{
   await page.type('#ctl00_ContentPlaceHolder1_txtRol',rol)
   await page.type('#ctl00_ContentPlaceHolder1_txtRol2',dv)
   await page.click('#ctl00_ContentPlaceHolder1_btnAceptar')
+  
 
 
   try{
