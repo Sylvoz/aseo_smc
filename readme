@@ -1,3 +1,10 @@
-http://localhost:3000/extractor?municipality=renca&id=1222-317
+http://localhost:3000/extractor?municipality=Renca&id=1222-317
 
-http://localhost:3000/extractor?municipality=conchali&id=2590-626
+http://localhost:3000/extractor?municipality=La Florida&id=3884-228
+
+http://localhost:3000/extractor?municipality=La Granja&id=06360-00001
+
+http://localhost:3000/extractor?municipality=La Cisterna&id=2901-744
+
+http://localhost:3000/extractor?municipality=Recoleta&id=1269-77
+

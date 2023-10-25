@@ -23,9 +23,11 @@ try{
   });
 
   const page = await browser.newPage()
+  await page.deleteCookie();
 
-  
-  await page.goto(`https://pago.smc.cl/pagoAseov2/muni/${municipality}.aspx`,{timeout:20000});
+  const url=`https://pago.smc.cl/pagoAseov2/muni/${municipality}.aspx`
+
+  await page.goto(url,{timeout:20000});
   await page.waitForSelector('#ctl00_ContentPlaceHolder1_txtRol',{timeout:5000})
   await page.type('#ctl00_ContentPlaceHolder1_txtRol',rol)
   await page.type('#ctl00_ContentPlaceHolder1_txtRol2',dv)
@@ -35,11 +37,21 @@ try{
 
   try{
     await page.waitForSelector('#ctl00_ContentPlaceHolder1_lblTextHelp',{timeout:5000})
-    return {data:[{
-      id:rol+'-'+dv,
-      measurement_date:fechaFormateada,
-      invoice_amount: "Predio no existe",
-    }]}
+    let working= document.getElementById("ctl00_ContentPlaceHolder1_lblTextHelp").innerText
+    if (working == 'PREDIO NO EXISTE'){
+      return {data:[{
+        id:rol+'-'+dv,
+        measurement_date:fechaFormateada,
+        invoice_amount: "Predio no existe",
+      }]}
+    } else {
+      return {data:[{
+        id:rol+'-'+dv,
+        measurement_date:fechaFormateada,
+        invoice_amount: "Error al cargar página",
+      }]}
+    }
+   
   } catch{
     
   }
