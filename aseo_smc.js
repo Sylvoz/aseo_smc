@@ -55,7 +55,7 @@ try{
   }
 
   try{
-  await page.waitForSelector('#ctl00_ContentPlaceHolder1_UpdatePanel2 > table > tbody > tr:nth-child(2) > td:nth-child(6)',{timeout:5000})
+  await page.waitForSelector('#ctl00_ContentPlaceHolder1_UpdatePanel2 > table > tbody > tr:nth-child(2) > td:nth-child(6)',{timeout:7000})
 
   
   const result= await page.evaluate(() =>{
