@@ -36,7 +36,7 @@ try{
 
 
   try{
-    await page.waitForSelector('#ctl00_ContentPlaceHolder1_lblTextHelp',{timeout:5000})
+    await page.waitForSelector('#ctl00_ContentPlaceHolder1_lblTextHelp',{timeout:2000})
     let working= document.getElementById("ctl00_ContentPlaceHolder1_lblTextHelp").innerText
     if (working == 'PREDIO NO EXISTE'){
       return {data:[{
@@ -46,8 +46,6 @@ try{
       }]}
     } else {
       return {data:[{
-        id:rol+'-'+dv,
-        measurement_date:fechaFormateada,
         invoice_amount: "Error al cargar página",
       }]}
     }
