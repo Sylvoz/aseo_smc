@@ -4,17 +4,6 @@ export async function aseo_smc(municipality,rol,dv){
 
 
 try{
-  // measurement_date info
-  const fechaActual = new Date();
-
-  const dia = fechaActual.getDate();
-  const mes = fechaActual.getMonth() + 1;
-  const año = fechaActual.getFullYear();
-  const hora = fechaActual.getHours();
-  const minutos = fechaActual.getMinutes();
-  const segundos = fechaActual.getSeconds();
-
-  const fechaFormateada = `${año}-${mes}-${dia} ${hora}:${minutos}:${segundos}`;
 
   // Puppeteer process
   const browser = await puppeteer.launch({
@@ -23,7 +12,6 @@ try{
   });
 
   const page = await browser.newPage()
-  await page.deleteCookie();
 
   const url=`https://pago.smc.cl/pagoAseov2/muni/${municipality}.aspx`
 
@@ -36,18 +24,17 @@ try{
 
 
   try{
-    await page.waitForSelector('#ctl00_ContentPlaceHolder1_lblTextHelp',{timeout:2000})
+    await page.waitForSelector('#ctl00_ContentPlaceHolder1_lblTextHelp',{timeout:500})
     let working= document.getElementById("ctl00_ContentPlaceHolder1_lblTextHelp").innerText
+    console.log('here')
     if (working == 'PREDIO NO EXISTE'){
-      return {data:[{
-        id:rol+'-'+dv,
-        measurement_date:fechaFormateada,
+      return {data:{
         invoice_amount: "Predio no existe",
-      }]}
+      }}
     } else {
-      return {data:[{
+      return {data:{
         invoice_amount: "Error al cargar página",
-      }]}
+      }}
     }
    
   } catch{
@@ -74,22 +61,20 @@ try{
   await browser.close()
 
   if(total >=0){
-    return { data:[{
-      id:rol+'-'+dv,
-      measurement_date:fechaFormateada,
+    return { data:{
       invoice_amount: total,
-    }]}
+    }}
   }
 
   } catch {
-    return {data:[{
+    return {data:{
       invoice_amount: "Error al cargar página",
-    }]}
+    }}
   }}
   catch{
-    return {data:[{
+    return {data:{
       invoice_amount: "Error al cargar página",
-    }]}
+    }}
   }
   
 }

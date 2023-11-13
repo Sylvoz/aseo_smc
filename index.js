@@ -16,16 +16,16 @@ app.get("/extractor",query("id").notEmpty(),query("municipality").notEmpty(),
       const data = req.query.id;
       const rol = data.substring(0,data.indexOf('-'))
       const dv= data.substring(data.indexOf('-')+1,data.length)
-      const municipality= req.query.municipality.toLowerCase().replace('í','i').replace('ú','u').replace(' ','_')
+      const municipality= req.query.municipality.toLowerCase().replace('í','i').replace('ú','u').replace(' ','_').replace('-','_')
       if (rol == "" || dv ==""){
         return res.status(400).send({ id: "Error en rol" })
       }
       const total = await aseo_smc(municipality,rol, dv);
-      const {invoice_amount }= total.data[0]
+      const {invoice_amount }= total.data
       if (invoice_amount == "Error al cargar página"){
-        res.status(500).send(JSON.stringify(total))
+        res.status(500).json(total)
       }else {
-        res.status(200).send(JSON.stringify(total));
+        res.status(200).json(total);
       }
     } else {
       return res.status(400).send({ id: "Falta rol o municipalidad" });
